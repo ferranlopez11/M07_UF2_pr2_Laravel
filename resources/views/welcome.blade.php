@@ -81,7 +81,10 @@
                         @csrf
                         <div class="mb-3">
                             <label for="name" class="form-label">Nombre:</label>
-                            <input type="text" name="name" class="form-control" required>
+                            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" required>
+                            @error('name')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="mb-3">
                             <label for="year" class="form-label">Año:</label>
@@ -101,11 +104,19 @@
                         </div>
                         <div class="mb-3">
                             <label for="img_url" class="form-label">URL de la imagen:</label>
-                            <input type="text" name="img_url" class="form-control" required>
+                            <input type="text" name="img_url" class="form-control @error('img_url') is-invalid @enderror" required>
+                            @error('img_url')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="d-grid">
                             <button type="submit" class="btn btn-custom">Registrar Película</button>
                         </div>
+                        @if (session('status'))
+                            <div class="alert alert-danger mt-3">
+                                {{ session('status') }}
+                            </div>
+                        @endif
                     </form>
                 </div>
             </div>
