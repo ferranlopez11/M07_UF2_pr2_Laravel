@@ -74,17 +74,21 @@
             <div class="col-md-8">
                 <div class="form-container">
                     <h1 class="text-center mb-4">Registrar Nueva Película</h1>
-                    @if (!empty($status))
+                    <!--@if (!empty($status))
                         <div class="alert alert-danger">{{ $status }}</div>
+                    @endif-->
+                    @if ($errors->any())
+                    <div class="alert alert-danger">
+                        @foreach ($errors->all() as $error)
+                        {{ $error }}
+                        @endforeach
+                    </div>
                     @endif
                     <form action="{{ route('createFilm') }}" method="POST">
-                        @csrf
+                    {{ csrf_field() }}
                         <div class="mb-3">
                             <label for="name" class="form-label">Nombre:</label>
-                            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" required>
-                            @error('name')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
+                            <input type="text" name="name" class="form-control" required>
                         </div>
                         <div class="mb-3">
                             <label for="year" class="form-label">Año:</label>
@@ -104,10 +108,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="img_url" class="form-label">URL de la imagen:</label>
-                            <input type="text" name="img_url" class="form-control @error('img_url') is-invalid @enderror" required>
-                            @error('img_url')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
+                            <input type="text" name="img_url" class="form-control" required>
                         </div>
                         <div class="d-grid">
                             <button type="submit" class="btn btn-custom">Registrar Película</button>

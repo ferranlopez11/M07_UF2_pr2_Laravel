@@ -156,14 +156,12 @@ class FilmController extends Controller
             if ($status) {
                 return redirect()->action('App\Http\Controllers\FilmController@listFilms');
             } else {
-                return redirect()->back()
-                ->with("status", "Error al añadir película")
-                ->withInput();
+                return redirect('/')
+                ->with("status", "Error al añadir película");
             }
         } else {
-            return redirect()->back()
-            ->withErrors(['name' => 'La película ya existe'])
-            ->withInput();
+            return redirect('/')
+            ->withErrors(['name' => 'La película ya existe']);
         }
     }
     
